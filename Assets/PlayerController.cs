@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     public float moveSpeed = 5f;
 
+    public Animator animator;
+
     Vector2 movement;
 
     void Start()
@@ -20,6 +22,9 @@ public class PlayerController : MonoBehaviour
     {
         movement.x = Input.GetAxisRaw("Horizontal");
         movement.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Horizontal", movement.x);
+        animator.SetFloat("Vertical", movement.y);
     }
 
     void FixedUpdate()

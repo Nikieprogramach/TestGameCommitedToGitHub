@@ -1,20 +1,46 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Interactable : MonoBehaviour
 {
-    public Transform button;
+    public float radius = 2;
+    public Transform interactionTransform;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool isFocus = false;
+    public Transform player;
 
-    // Update is called once per frame
+    bool hasInteracted = false;
+
     void Update()
     {
-        button.position = transform.position;
+        if(isFocus)
+        {
+            float distance = Vector2.Distance(player.position, transform.position);
+            if(distance <= radius)
+            {
+                Interact();
+            }
+        }
+    }
+
+    public void OnFocused(Transform playerTransform)
+    {
+        isFocus = true;
+        player = playerTransform;
+    }
+
+    public virtual void Interact()
+    {
+        Debug.Log("Interacting with:" + transform.name);
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        if(interactionTransform == null)
+        {
+            interactionTransform = transform;
+        }
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, radius);
     }
 }

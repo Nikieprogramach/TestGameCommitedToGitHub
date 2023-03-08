@@ -8,7 +8,11 @@ public class ItemPuckup : Interactable
     {
         base.Interact ();
 
-        PickUp();
+        float distance = Vector2.Distance(player.position, transform.position);
+        if (distance <= radius)
+        {
+            PickUp();
+        }
     }
 
     void PickUp()

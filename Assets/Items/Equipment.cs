@@ -7,8 +7,8 @@ public class Equipment : Item
 {
     public EquipmentSlot equipSlot;
 
-    public int armorModifier;
-    public int damageModifier;
+    public int PerformanceModifier;
+    public int HeatProduced;
 
     public override void Use()
     {
@@ -18,4 +18,4 @@ public class Equipment : Item
     }
 }
 
-public enum EquipmentSlot {Head, Chest, Legs, Feet, Weapon, Shield }
+public enum EquipmentSlot {Motherboard, CPU, GPU, RAM, SSD, Cooler }

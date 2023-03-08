@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
 
     public Animator animator;
 
+    public LayerMask interactable;
+
     Vector2 movement;
 
     void Start()
@@ -27,25 +29,12 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("Vertical", movement.y);
 
         if (Input.GetButtonDown("Fire1"))
-        {
-            //Ray ray = cam.ScreenPointToRay(Input.mousePosition);
-            //ReycastHit2D hit;
-            //
-            //if (Physics2D.Raycast(ray, out hit, 100));
-            //{
-            //    Interactable interactable = hit.collider.GetComponent<Interactable>();
-            //    if(interactable != null)
-            //    {
-            //        interactable.OnFocused(transform);
-            //    }
-            //}
+        {             
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, interactable);
 
-             
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
-            if (hit.collider.gameObject.GetComponent<Interactable>() != null)
+            if ( hit.collider != null && hit.collider.gameObject.GetComponent<Interactable>() != null)
             {
-                hit.collider.gameObject.GetComponent<Interactable>().isFocus = true;
+                hit.collider.gameObject.GetComponent<Interactable>().Interact();
             }
 
 
